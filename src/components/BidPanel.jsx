@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function BidPanel({ onSubmit, disabled }) {
+export default function BidPanel({ onSubmit, disabled, disabledLabel }) {
   const [form, setForm] = useState({ message: "", price: "" });
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -56,7 +56,11 @@ export default function BidPanel({ onSubmit, disabled }) {
           type="submit"
           disabled={busy || disabled}
         >
-          {busy ? "Sending..." : disabled ? "Log in to bid" : "Submit bid"}
+          {busy
+            ? "Sending..."
+            : disabled
+              ? disabledLabel || "Log in to bid"
+              : "Submit bid"}
         </button>
       </div>
     </form>
