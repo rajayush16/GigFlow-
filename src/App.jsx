@@ -15,6 +15,21 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [hireBusy, setHireBusy] = useState(false);
   const [error, setError] = useState("");
+  const bidDisabledLabel = useMemo(() => {
+    if (!selectedGig) {
+      return "Select a gig";
+    }
+    if (!user) {
+      return "Log in to bid";
+    }
+    if (isOwner) {
+      return "You're the client";
+    }
+    if (selectedGig.status === "assigned") {
+      return "Bidding closed";
+    }
+    return "";
+  }, [selectedGig, user, isOwner]);
 
   const isOwner = useMemo(() => {
     if (!user || !selectedGig) {
@@ -166,6 +181,7 @@ export default function App() {
               onHire={handleHire}
               hireBusy={hireBusy}
               bidDisabled={!user || isOwner || selectedGig?.status === "assigned"}
+              disabledLabel={bidDisabledLabel}
             />
           </div>
         </div>
