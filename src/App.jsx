@@ -15,6 +15,13 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [hireBusy, setHireBusy] = useState(false);
   const [error, setError] = useState("");
+  const isOwner = useMemo(() => {
+    if (!user || !selectedGig) {
+      return false;
+    }
+    return String(user.id) === String(selectedGig.ownerId?._id || selectedGig.ownerId);
+  }, [user, selectedGig]);
+
   const bidDisabledLabel = useMemo(() => {
     if (!selectedGig) {
       return "Select a gig";
@@ -30,13 +37,6 @@ export default function App() {
     }
     return "";
   }, [selectedGig, user, isOwner]);
-
-  const isOwner = useMemo(() => {
-    if (!user || !selectedGig) {
-      return false;
-    }
-    return String(user.id) === String(selectedGig.ownerId?._id || selectedGig.ownerId);
-  }, [user, selectedGig]);
 
   const loadGigs = async (query = "") => {
     try {
