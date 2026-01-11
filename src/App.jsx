@@ -55,6 +55,16 @@ export default function App() {
     }
   };
 
+  useEffect(() => {
+    if (!user || !selectedGig || !isOwner) {
+      return;
+    }
+
+    apiRequest(`/api/bids/${selectedGig._id}`)
+      .then((data) => setBids(data.bids))
+      .catch((err) => setError(err.message));
+  }, [user, selectedGig, isOwner]);
+
   const handleCreateGig = async (payload) => {
     const data = await apiRequest("/api/gigs", {
       method: "POST",
