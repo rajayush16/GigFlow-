@@ -14,7 +14,7 @@ export default function GigCard({ gig, selected, onSelect }) {
           ${gig.budget}
         </span>
       </div>
-      <p className="mt-2 line-clamp-2 text-sm text-slate-400">
+      <p className="mt-2 text-sm text-slate-400">
         {gig.description}
       </p>
       <div className="mt-4 text-xs text-slate-500">
