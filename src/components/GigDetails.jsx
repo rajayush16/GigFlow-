@@ -9,6 +9,7 @@ export default function GigDetails({
   onHire,
   hireBusy,
   bidDisabled,
+  disabledLabel,
 }) {
   if (!gig) {
     return (
@@ -25,7 +26,7 @@ export default function GigDetails({
           <div>
             <h2 className="text-2xl font-semibold text-slate-100">{gig.title}</h2>
             <p className="mt-2 text-sm text-slate-400">
-              {gig.ownerId?.name} · {gig.ownerId?.email}
+              {gig.ownerId?.name} - {gig.ownerId?.email}
             </p>
           </div>
           <span className="rounded-full border border-slate-700 px-3 py-1 text-xs uppercase tracking-[0.2em] text-slate-300">
@@ -42,7 +43,11 @@ export default function GigDetails({
       {isOwner ? (
         <BidList bids={bids} onHire={onHire} loading={hireBusy} />
       ) : (
-        <BidPanel onSubmit={onBid} disabled={bidDisabled} />
+        <BidPanel
+          onSubmit={onBid}
+          disabled={bidDisabled}
+          disabledLabel={disabledLabel}
+        />
       )}
     </div>
   );
