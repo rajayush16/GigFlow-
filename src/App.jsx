@@ -165,7 +165,7 @@ export default function App() {
               onBid={handleBid}
               onHire={handleHire}
               hireBusy={hireBusy}
-              bidDisabled={!user || isOwner}
+              bidDisabled={!user || isOwner || selectedGig?.status === "assigned"}
             />
           </div>
         </div>
