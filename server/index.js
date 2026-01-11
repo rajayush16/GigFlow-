@@ -15,9 +15,10 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
+const clientOrigin = process.env.CLIENT_ORIGIN || "http://localhost:5173";
 const io = new SocketServer(server, {
   cors: {
-    origin: process.env.CLIENT_ORIGIN,
+    origin: clientOrigin,
     credentials: true,
   },
 });
@@ -26,7 +27,7 @@ app.set("io", io);
 
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN,
+    origin: clientOrigin,
     credentials: true,
   })
 );
