@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { io } from "socket.io-client";
+import { useAuth } from "./AuthContext";
 
 const NotificationsContext = createContext(null);
 
 const SOCKET_URL = import.meta.env.VITE_API_BASE || "http://localhost:4000";
 
-export function NotificationsProvider({ children, user }) {
+export function NotificationsProvider({ children }) {
+  const { user } = useAuth();
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
