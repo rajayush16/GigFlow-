@@ -19,10 +19,11 @@ export function verifyToken(token) {
 }
 
 export function getCookieOptions() {
+  const isSecure = process.env.COOKIE_SECURE === "true";
   return {
     httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.COOKIE_SECURE === "true",
+    sameSite: isSecure ? "none" : "lax",
+    secure: isSecure,
   };
 }
 
